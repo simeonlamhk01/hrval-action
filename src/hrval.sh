@@ -117,6 +117,7 @@ function validate {
   echo "Writing Helm release to ${TMPDIR}/${HELM_RELEASE_NAME}.release.yaml"
   if [[ ${HELM_VER} == "v3" ]]; then
     if [[ "${CHART_PATH}" ]]; then
+      echo "helm3 update dependance"
       helmv3 dependency build ${CHART_DIR}
     fi
     helmv3 template ${HELM_RELEASE_NAME} ${CHART_DIR} \
@@ -125,6 +126,7 @@ function validate {
       -f ${TMPDIR}/${HELM_RELEASE_NAME}.values.yaml > ${TMPDIR}/${HELM_RELEASE_NAME}.release.yaml
   else
     if [[ "${CHART_PATH}" ]]; then
+      echo "helm update dependance"
       helm dependency build ${CHART_DIR}
     fi
     helm template ${CHART_DIR} \
